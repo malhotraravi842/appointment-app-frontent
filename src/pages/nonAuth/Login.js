@@ -3,6 +3,9 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/auth";
 import { Formik, Form, Field } from "formik";
+import { TextInput } from "../../components/FormInput";
+import PasswordInput from "../../components/FormInput/PasswordInput";
+import { Button } from "../../components/Button";
 
 const Login = (props) => {
   const initialValues = () => {
@@ -23,10 +26,19 @@ const Login = (props) => {
         <Formik initialValues={initialValues()} onSubmit={submitHandler}>
           {({ values }) => (
             <Form>
-              <Field type="email" name="email" />
-              <Field type="password" name="password" />
+              <TextInput
+                label="Email"
+                type="email"
+                name="email"
+                placeholder="ravi@lcx.com"
+              />
+              <PasswordInput
+                label="Password"
+                name="password"
+                placeholder="*****"
+              />
 
-              <button type="submit">Login</button>
+              <Button type="submit" label="Login" />
             </Form>
           )}
         </Formik>
