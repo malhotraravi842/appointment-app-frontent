@@ -1,11 +1,11 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { AuthNavbar, NonAuthNavbar } from "./components/Navbar";
 import { AuthRouter, NonAuthRouter } from "./router";
+import { compose } from "redux";
+import { connect } from "react-redux";
 import "./styles/main.scss";
 
-function App() {
-  // eslint-disable-next-line
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const App = ({ isLoggedIn }) => {
   return (
     <Fragment>
       {isLoggedIn ? <AuthNavbar /> : <NonAuthNavbar />}
@@ -14,6 +14,10 @@ function App() {
       </div>
     </Fragment>
   );
-}
+};
 
-export default App;
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.auth.isLoggedIn,
+});
+
+export default compose(connect(mapStateToProps))(App);

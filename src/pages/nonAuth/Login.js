@@ -1,7 +1,10 @@
 import React from "react";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { loginUser } from "../../actions/auth";
 import { Formik, Form, Field } from "formik";
 
-const Login = () => {
+const Login = (props) => {
   const initialValues = () => {
     return {
       email: "",
@@ -10,8 +13,9 @@ const Login = () => {
   };
 
   const submitHandler = () => {
-    console.log("form submitted");
+    props.loginUser();
   };
+
   return (
     <div className="login__container">
       <h1>Login</h1>
@@ -31,4 +35,8 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  loginUser: () => dispatch(loginUser()),
+});
+
+export default compose(connect(null, mapDispatchToProps))(Login);
