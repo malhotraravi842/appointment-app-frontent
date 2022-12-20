@@ -2,12 +2,13 @@ import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/auth";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import { TextInput } from "../../components/FormInput";
 import PasswordInput from "../../components/FormInput/PasswordInput";
 import { Button } from "../../components/Button";
 
 const Login = (props) => {
+  const { loader } = props;
   const initialValues = () => {
     return {
       email: "",
@@ -15,8 +16,12 @@ const Login = (props) => {
     };
   };
 
-  const submitHandler = () => {
-    props.loginUser();
+  const submitHandler = (values) => {
+    let data = {
+      email: values.email,
+      password: values.password,
+    };
+    props.loginUser(data);
   };
 
   return (
@@ -38,7 +43,9 @@ const Login = (props) => {
                 placeholder="*****"
               />
 
-              <Button type="submit" label="Login" />
+              <Button type="submit" disabled={loader}>
+                {loader ? "..." : "Login"}
+              </Button>
             </Form>
           )}
         </Formik>
@@ -48,7 +55,12 @@ const Login = (props) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  loginUser: () => dispatch(loginUser()),
+  loginUser: (data) => dispatch(loginUser(data)),
 });
 
-export default compose(connect(null, mapDispatchToProps))(Login);
+const mapStateToProps = (state) => ({
+  loader: state.auth.loader,
+  error: state.auth.authError,
+});
+
+export default compose(connect(mapStateToProps, mapDispatchToProps))(Login);

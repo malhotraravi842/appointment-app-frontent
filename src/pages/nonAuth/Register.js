@@ -17,7 +17,7 @@ const Register = () => {
       <h1>Register</h1>
       <div className="register__form">
         <Formik initialValues={initialValues()}>
-          {({}) => (
+          {({ values }) => (
             <Form>
               <TextInput
                 label="Full Name"
@@ -43,7 +43,7 @@ const Register = () => {
                 name="confirmPassword"
                 placeholder="*****"
               />
-              <Button label="Register" type="submit" />
+              <Button label="Register">Register</Button>
             </Form>
           )}
         </Formik>
