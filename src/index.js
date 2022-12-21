@@ -9,6 +9,8 @@ import { Provider } from "react-redux";
 import rootReducer from "./reducers";
 import createSagaMiddleWare from "redux-saga";
 import { Saga } from "./sagas";
+import { Provider as AlertProvider, transitions, positions } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
 
 const sagaMiddleware = createSagaMiddleWare();
 
@@ -16,12 +18,23 @@ const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(Saga);
 
+const options = {
+  // you can also just use 'bottom center'
+  position: positions.TOP_RIGHT,
+  timeout: 5000,
+  offset: "40px",
+  // you can also just use 'scale'
+  transition: transitions.SCALE,
+};
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <AlertProvider template={AlertTemplate} {...options}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </AlertProvider>
   </Provider>
 );
 

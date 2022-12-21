@@ -20,4 +20,12 @@
     outline: none;
     border: none;
   }
+
+  &.error {
+    border: 1px solid red;
+  }
+}
+.form__input .form__input__errormsg {
+  color: red;
+  font-size: 14px;
 }

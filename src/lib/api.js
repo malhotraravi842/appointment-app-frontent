@@ -8,7 +8,15 @@ const API = axios.create({
 });
 
 export async function loginUser(data) {
-  const response = await API.post("/auth/login", data).then((res) => res);
+  const response = await API.post("user/auth/login", data).then((res) => res);
+
+  return response;
+}
+
+export async function registerUser(data) {
+  const response = await API.post("user/auth/register", data).then(
+    (res) => res
+  );
 
   return response;
 }

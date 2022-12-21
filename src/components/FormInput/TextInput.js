@@ -1,6 +1,6 @@
-import { Field } from "formik";
+import { Field, ErrorMessage } from "formik";
 
-const TextInput = ({ label, type, name, placeholder }) => {
+const TextInput = ({ label, type, name, placeholder, error }) => {
   return (
     <div className="form__input">
       <label>{label || ""}</label>
@@ -8,6 +8,12 @@ const TextInput = ({ label, type, name, placeholder }) => {
         type={type || "text"}
         name={name}
         placeholder={placeholder || ""}
+        className={error ? "error" : ""}
+      />
+      <ErrorMessage
+        name={name}
+        component="div"
+        className="form__input__errormsg"
       />
     </div>
   );
