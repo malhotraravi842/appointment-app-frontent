@@ -1,10 +1,11 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Login, Register } from "../pages/nonAuth";
+import { Login, Register, LandingPage } from "../pages/nonAuth";
 
 const NonAuthRouter = () => (
   <Routes>
-    <Route exact path="/" element={<Login />} />
+    <Route exact path="/" element={<LandingPage />} />
+    <Route exact path="/login" element={<Login />} />
     <Route exact path="/register" element={<Register />} />
   </Routes>
 );

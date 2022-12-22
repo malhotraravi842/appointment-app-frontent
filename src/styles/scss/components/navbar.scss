@@ -11,6 +11,9 @@
   font-size: 24px;
   font-weight: bold;
 }
+.navbar__title .navbar__navlink {
+  font-size: inherit;
+}
 .navbar__navlist {
   display: flex;
 }
